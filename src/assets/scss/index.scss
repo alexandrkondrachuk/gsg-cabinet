@@ -3,3 +3,83 @@
 @import "utilities/mixins";
 @import "vendors/bootstrap";
 @import "base/typography";
+
+@include responsive();
+
+*::-moz-selection {
+  background-color: var(--teal);
+}
+
+*::selection {
+  background-color: var(--teal);
+}
+
+body {
+  font: 300 1rem var(--font-family-sans-serif);
+  color: var(--dark);
+}
+
+.btn-main {
+  min-width: response(178px);
+  min-height: response(58px);
+  background-color: var(--green);
+  border: response(1px) solid var(--green);
+  border-radius: 0;
+  color: var(--white);
+  font-weight: 300;
+  transition: color .45s ease-in-out, background-color .45s ease-in-out;
+  &:hover, &:focus {
+    text-decoration: none;
+    background-color: var(--white);
+    color: var(--green);
+  }
+}
+
+#button {
+  display: inline-block;
+  background-color: var(--green);
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 60px;
+  right: 40px;
+  transition: background-color .3s,
+  opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  &:hover, &:focus {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--gray);
+  }
+  &:after {
+    content: "\f062";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 60px;
+    color: var(--white);
+    @include media-breakpoint-down(md) {
+      font-size: 1.4em;
+      line-height: 40px;
+    }
+  }
+  &:active {
+    background-color: var(--dark);
+  }
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @include media-breakpoint-down(md) {
+    width: 40px;
+    height: 40px;
+    bottom: 40px;
+    right: 20px;
+  }
+}

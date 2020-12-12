@@ -1,3 +1,24 @@
+@import "../../assets/scss/utilities/variables";
+@import "../../assets/scss/utilities/functions";
+@import "../../assets/scss/base/typography";
+
 .App {
-  text-align: center;
+  .Alert {
+    margin: response(45px) 0;
+    border-radius: 0;
+    &__SVG {
+      text-align: center;
+      svg {
+        width: response(75px);
+        height: response(75px);
+        fill: var(--red);
+      }
+    }
+
+    &__Text {
+      padding: response(20px) 0;
+      text-align: center;
+      @extend .font-primary;
+    }
+  }
 }
