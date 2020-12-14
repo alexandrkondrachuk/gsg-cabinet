@@ -4,6 +4,7 @@ import { app as appActions } from '../../actions';
 import { LOCALES } from '../../../lang';
 import AuthModel from '../../../models/auth-model';
 import AuthInfoModel from '../../../models/auth-info-model';
+import UserInfoModel from '../../../models/user-info-model';
 import Register from '../../../classes/register';
 import RegisterSession from '../../../classes/register-session';
 import { config } from '../../../config';
@@ -22,6 +23,8 @@ const initialState = new Record({
     lang: LOCALES.ru,
     auth,
     authInfo,
+    userInfo: new UserInfoModel(),
+    stations: null,
 })();
 
 const app = (state = initialState, action) => {
@@ -31,6 +34,10 @@ const app = (state = initialState, action) => {
         return state.merge({ lang: action.payload });
     case appActions.APP_CHANGE_LANG_REJECTED:
         return state.merge({ lang: action.payload || LOCALES.en });
+    case appActions.APP_GET_USER_INFO:
+        return state.merge({ userInfo: action.payload });
+    case appActions.APP_GET_STATIONS:
+        return state.merge({ stations: action.payload });
     default:
         return state;
     }

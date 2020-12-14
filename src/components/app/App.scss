@@ -3,11 +3,14 @@
 @import "../../assets/scss/base/typography";
 
 .App {
+  margin: response(40px) 0;
   .Alert {
     margin: response(45px) 0;
     border-radius: 0;
+
     &__SVG {
       text-align: center;
+
       svg {
         width: response(75px);
         height: response(75px);
@@ -20,5 +23,52 @@
       text-align: center;
       @extend .font-primary;
     }
+  }
+
+  &__Tabs {
+    &.nav-tabs {
+      border-bottom-color: var(--green);
+      .nav-item {
+        min-width: response(125px);
+        text-align: center;
+        @include media-breakpoint-down(md) {
+          width: 100%;
+          text-align: start;
+        }
+      }
+      .nav-link {
+        font: 500 response(18px)/1.25 var(--font-family-sans-serif);
+        color: var(--green);
+        border-color: var(--green);
+        transition: all .45s linear;
+        &.active {
+          border-color: var(--green);
+          background-color: var(--green);
+          color: var(--white);
+        }
+        &:hover {
+          cursor: pointer;
+          border-color: var(--green);
+          background-color: var(--green);
+          color: var(--white);
+        }
+        @include media-breakpoint-down(md) {
+          border-radius: 0;
+        }
+      }
+    }
+
+    .svg-inline--fa {
+      @include media-breakpoint-down(sm) {
+        min-width: 20px;
+      }
+    }
+  }
+
+  &__TabContent {
+    padding: response(15px);
+    border-radius: 0 0 4px 4px;
+    border: 1px solid var(--green);
+    border-top-color: transparent;
   }
 }

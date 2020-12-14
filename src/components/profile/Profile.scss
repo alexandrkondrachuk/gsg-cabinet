@@ -1,1 +1,137 @@
-.Profile {}
+@import "../../assets/scss/utilities/variables";
+@import "../../assets/scss/utilities/functions";
+@import "../../assets/scss/base/typography";
+
+.Profile {
+  &__Column {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &:first-of-type {
+      align-items: center;
+    }
+
+    &:nth-of-type(2) {
+      align-items: flex-start;
+    }
+  }
+
+  &__Card {
+    margin: response(40px) response(20px);
+    box-shadow: 0 10px 16px -16px var(--dark);
+    @include media-breakpoint-down(md) {
+      margin: 0;
+    }
+  }
+
+  &__Avatar {
+    margin-bottom: response(15px);
+  }
+
+  &__Login {
+    @extend .font-mono-1;
+  }
+
+  &__FullName.card-subtitle {
+    margin-bottom: response(15px);
+    @extend .font-mono-2;
+    color: var(--gray);
+  }
+
+  form {
+    width: 100%;
+    height: 100%;
+  }
+
+  #balance, #change-password {
+    border-radius: 0;
+    margin-bottom: 3px;
+    @extend .font-mono-4;
+  }
+
+  .Balance.card, .ChangePassword.card {
+    margin-bottom: 10px;
+    border-radius: 0;
+    box-shadow: 0 10px 16px -16px var(--dark);
+  }
+
+  .Balance {
+    &__Value {
+      margin: response(15px) 0;
+      @extend .font-secondary;
+    }
+
+    .btn {
+      border-radius: 0;
+      @extend .font-secondary;
+    }
+  }
+
+  #changePassword {
+    @extend .font-secondary;
+
+    input {
+      @extend .font-secondary;
+      border-radius: 0;
+      border-color: transparent;
+      min-height: response(45px);
+      color: var(--gray);
+      background-color: var(--bg-light);
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
+    label {
+      margin: 0;
+      @extend .font-mono-5;
+      font-weight: 500;
+      color: var(--green);
+    }
+
+    .btn {
+      border-radius: 0;
+      @extend .font-secondary;
+    }
+  }
+
+  #changeProfile {
+    @extend .font-secondary;
+
+    input, select {
+      @extend .font-secondary;
+      border-radius: 0;
+      border-color: transparent;
+      min-height: response(45px);
+      color: var(--gray);
+      background-color: var(--bg-light);
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
+    label {
+      margin: 0;
+      @extend .font-mono-5;
+      font-weight: 500;
+      color: var(--green);
+    }
+
+    .btn {
+      border-radius: 0;
+      @extend .font-secondary;
+    }
+  }
+
+  &__Details__Title {
+    margin: response(60px) 0 0 0;
+    @extend .font-mono-1;
+  }
+}
