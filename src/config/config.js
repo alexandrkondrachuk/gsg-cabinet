@@ -1,6 +1,6 @@
 import config from 'react-global-configuration';
 
-const server = 'http://globalsungroup.com/';
+const server = 'http://akondrachuk.s-host.net/';
 const apiServer = 'http://globalsungroup.com/sunserver/';
 
 config.set({
@@ -14,6 +14,7 @@ config.set({
             en: '/en/home/',
         },
         api: {
+            createPurchaseURL: `${apiServer}api/Account/CreatePurchaseByUser`,
             userDataURL: `${apiServer}api/Account/GetUserData`,
             stationsApiURL: `${apiServer}api/PowerPlants/`,
             contentPostsApiURL: `${server}wp-json/wp/v2/posts`,
@@ -25,6 +26,15 @@ config.set({
     timers: {
         redirectAfterAuth: 5 * 1000,
     },
+    dateFormat: 'DD.MM.YYYY',
+    limits: {
+        min: 0,
+        max: 100000,
+        step: 1,
+    },
+    numberFormat: '0,0.00',
+    numberParts: [',', ' '],
+    numberShortFormat: '0,0',
 });
 
 export {

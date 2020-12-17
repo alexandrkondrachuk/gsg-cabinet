@@ -7,6 +7,7 @@ const urls = config.get('urls');
 const userDataURLs = _.get(urls, 'api.userDataURL');
 const contentPostsApiURL = _.get(urls, 'api.contentPostsApiURL');
 const stationsApiURL = _.get(urls, 'api.stationsApiURL');
+const createPurchaseURL = _.get(urls, 'api.createPurchaseURL');
 const categories = _.get(api, 'categories');
 
 export default class Transport {
@@ -53,6 +54,21 @@ export default class Transport {
             }
             // eslint-disable-next-line consistent-return
             return null;
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    // Do Purchase
+    static async doPurchase(model, token) {
+        if (!model || !token) return;
+
+        try {
+            const purchase = await axios.post(createPurchaseURL, model, { headers: { Authorization: `Bearer ${token}` } });
+            const status = _.get(purchase, 'status');
+
+            // eslint-disable-next-line consistent-return
+            return status === Transport.STATUS_OK;
         } catch (e) {
             throw new Error(e);
         }

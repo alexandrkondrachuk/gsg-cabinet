@@ -1,10 +1,39 @@
 import React from 'react';
 import './Investments.scss';
+import * as _ from 'lodash';
+import * as PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import AuthInfoModel from '../../models/auth-info-model';
+import { StationCard } from './components';
 
-export default function Investments() {
+function Investments({ stations, authInfo }) {
     return (
         <div className="Investments">
-            <h2>Investments Component</h2>
+            {(stations && stations.length) && (
+                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} />))
+            )}
         </div>
     );
 }
+
+const mapStateToProps = (state) => {
+    const stations = _.get(state.app, 'stations');
+    const authInfo = _.get(state.app, 'authInfo');
+    return { stations, authInfo };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    dispatch,
+});
+
+Investments.defaultProps = {
+    stations: null,
+};
+
+Investments.propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    stations: PropTypes.oneOfType([PropTypes.array, PropTypes.instanceOf(null)]),
+    authInfo: PropTypes.instanceOf(AuthInfoModel).isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Investments);

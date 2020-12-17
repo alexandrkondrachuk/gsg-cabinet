@@ -1,0 +1,145 @@
+@import "../../../../assets/scss/utilities/variables";
+@import "../../../../assets/scss/utilities/functions";
+@import "../../../../assets/scss/base/typography";
+
+.StationCard {
+  margin-bottom: response(30px);
+  box-shadow: 0 10px 16px -16px var(--dark);
+  overflow: hidden;
+
+  &__Row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  &__Col {
+    width: 100%;
+    height: 100%;
+    max-height: response(400px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__Details {
+      padding: response(30px) response(20px);
+
+      .card-title {
+
+      }
+    }
+  }
+
+  &__Thumbnail {
+    @include media-breakpoint-down(sm) {
+      border-radius: 4px 4px 0 0;
+      margin-bottom: 30px;
+    }
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    filter: brightness(0.85);
+    transform: translate3d(0, 0, 0);
+    transition: transform .45s ease-in-out;
+    border-radius: 4px 0 0 0;
+  }
+
+  .CardBody {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    @extend .font-mono-2;
+
+    .card-subtitle {
+      display: inline-block;
+      padding-right: response(15px);
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .svg-inline--fa {
+      min-width: 20px;
+    }
+  }
+
+  .btn {
+    @extend .font-mono-2;
+    border-radius: 0;
+    min-width: response(145px);
+    min-height: response(45px);
+  }
+}
+
+.InvestmentModal {
+  .modal-title {
+    @extend .font-mono-1;
+  }
+
+  .modal-content {
+    border-radius: 0;
+  }
+
+  .btn {
+    @extend .font-mono-2;
+    border-radius: 0;
+    min-width: response(145px);
+    min-height: response(45px);
+  }
+
+  .form-group {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  form {
+    padding: response(20px) 0;
+  }
+
+  input {
+    @extend .font-mono-5;
+    border-radius: 0;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  label {
+    width: 100%;
+    height: auto;
+    text-align: left;
+    margin: 0;
+    @extend .font-mono-5;
+    color: var(--green);
+  }
+
+  .rangeslider.rangeslider-horizontal, .react-numeric-input {
+    width: 100%;
+    height: auto;
+  }
+
+  .rangeslider__handle {
+    &:focus, &:hover {
+      box-shadow: none;
+      outline: none;
+    }
+    &-tooltip {
+      @extend .font-mono-5;
+      min-width: response(100px);
+      color: var(--green);
+    }
+  }
+
+  .rangeslider__fill {
+    background-color: var(--green);
+  }
+}

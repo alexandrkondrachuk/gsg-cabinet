@@ -14,12 +14,16 @@ import {
     faLock, faMoneyCheckAlt, faDollarSign,
 } from '@fortawesome/free-solid-svg-icons';
 import { useIntl } from 'react-intl';
+import numeral from 'numeral';
+import { config } from '../../config';
 import { t } from '../../lang';
 import UserInfoModel from '../../models/user-info-model';
 
 import avatarURL from '../../assets/images/icons/avatars/256_3.png';
 
 import './Profile.scss';
+
+const numberFormat = config.get('numberFormat');
 
 function Profile({ userInfo }) {
     // @todo move variables to the model
@@ -80,7 +84,7 @@ function Profile({ userInfo }) {
                                                         &nbsp;
                                                         { ':' }
                                                         &nbsp;
-                                                        { balance }
+                                                        { numeral(balance).format(numberFormat).replace(',', ' ') }
                                                         &nbsp;
                                                         <FontAwesomeIcon icon={faDollarSign} />
                                                     </div>
