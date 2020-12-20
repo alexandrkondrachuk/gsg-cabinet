@@ -73,6 +73,46 @@
     min-width: response(145px);
     min-height: response(45px);
   }
+
+  #calculator-form {
+    input {
+      @extend .font-mono-5;
+      border-radius: 0;
+      min-width: response(145px);
+      min-height: response(45px);
+    }
+
+    label {
+      @extend .font-mono-5;
+      color: var(--green);
+    }
+
+    .form-group-slider {
+      width: 100%;
+      height: 100%;
+      min-height: response(45px);
+      display: flex;
+      align-items: center;
+    }
+
+    .rc-slider-dot-active {
+      border-color: var(--green);
+    }
+
+    .rc-slider-track {
+      background-color: var(--green);
+    }
+
+    .rc-slider-handle {
+      border-color: var(--green);
+    }
+    .rc-slider-mark-text {
+      @extend .font-mono-5;
+      &:last-of-type {
+        transform: translateX(-100%) !important;
+      }
+    }
+  }
 }
 
 .InvestmentModal {
@@ -107,6 +147,7 @@
   input {
     @extend .font-mono-5;
     border-radius: 0;
+
     &:focus {
       outline: none;
       box-shadow: none;
@@ -132,6 +173,7 @@
       box-shadow: none;
       outline: none;
     }
+
     &-tooltip {
       @extend .font-mono-5;
       min-width: response(100px);

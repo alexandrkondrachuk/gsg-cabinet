@@ -6,59 +6,57 @@ import {
     Row, Col,
     Card, CardBody,
     CardTitle, Button,
-    Modal, ModalHeader, ModalBody, ModalFooter,
     Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMapMarkedAlt, faFileSignature, faPercentage, faBatteryQuarter, faTags, faHandHoldingUsd, faCalendarAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import NumericInput from 'react-numeric-input';
-import Slider from 'react-rangeslider';
+import Slider, { SliderTooltip } from 'rc-slider';
 import numeral from 'numeral';
 import { t } from '../../../../lang';
 import { config } from '../../../../config';
-import Transport from '../../../../classes/Transport';
+// import Transport from '../../../../classes/Transport';
 import AuthInfoModel from '../../../../models/auth-info-model';
 
+import 'rc-slider/assets/index.css';
 import './StationCard.scss';
 
 const dateFormat = config.get('dateFormat');
 const limits = config.get('limits');
 const numberShortFormat = config.get('numberShortFormat');
+const numberFormat = config.get('numberFormat');
 
 export default function StationCard({ station, authInfo }) {
-    const [modal, setModal] = useState(false);
+    console.log('authInfo: ', authInfo);
     const [formModel, setFormModel] = useState({
         KilowattAmount: 0,
         Amount: 0,
         PaymentAmount: 0,
+        Roi: _.get(station, 'Roi', 0),
+        EndInvestmentDate: moment(_.get(station, 'EndInvestmentDate')).format(dateFormat),
     });
-    const [investStatus] = useState(true);
-    const toggle = () => setModal(!modal);
-    // const toggleInvestStatus = () => setInvestStatus(!investStatus);
     const setPowerAmount = (value) => {
         const pricePerKW = _.get(station, 'PricePerKW');
         const paymentPerKW = _.get(station, 'PaymentPerKW');
         const kilowattAmount = +(value / pricePerKW).toFixed(2);
-        const paymentAmount = +(kilowattAmount * paymentPerKW).toFixed(2);
+        const paymentAmount = numeral(+(kilowattAmount * paymentPerKW).toFixed(2)).format(numberFormat).replace(',', ' ');
         setFormModel({
             ...formModel, Amount: value, KilowattAmount: kilowattAmount, PaymentAmount: paymentAmount,
         });
     };
 
-    const handleChangeAmount = (value) => {
-        // eslint-disable-next-line no-nested-ternary
-        const amount = (value > limits.max) ? limits.max : (value < limits.min) ? limits.min : value;
-        setPowerAmount(amount);
-    };
-
     const handleChangeSliderAmount = (value) => {
+        let v = +(value);
+        v = v > limits.max ? limits.max : v;
+        v = v < limits.min ? limits.min : v;
         // eslint-disable-next-line no-nested-ternary
-        setPowerAmount(value);
+        setPowerAmount(v);
     };
 
-    const doInvest = async () => {
+    console.log('form model', formModel);
+
+    /*    const doInvest = async () => {
         const token = _.get(authInfo, 'access_token', null);
         const model = {
             UserId: '',
@@ -67,6 +65,26 @@ export default function StationCard({ station, authInfo }) {
         };
         const purchase = await Transport.doPurchase(model, token);
         if (purchase) toggle();
+    }; */
+
+    const { Handle } = Slider;
+
+    const handle = (props) => {
+        const {
+            // eslint-disable-next-line react/prop-types
+            value, dragging, index, ...restProps
+        } = props;
+        return (
+            <SliderTooltip
+                prefixCls="rc-slider-tooltip"
+                overlay={`${numeral(value).format(numberShortFormat).replace(',', ' ')} $`}
+                visible={dragging}
+                placement="top"
+                key={index}
+            >
+                <Handle value={value} {...restProps} />
+            </SliderTooltip>
+        );
     };
 
     return (
@@ -174,51 +192,73 @@ export default function StationCard({ station, authInfo }) {
                     </Col>
                 </Row>
                 <CardBody>
-                    <Button className="btn btn-success" onClick={toggle}>{t('Invest')}</Button>
+                    <Row className="StationCard__Row">
+                        <Col sm="12" md="7">
+                            Chart
+                        </Col>
+                        <Col sm="12" md="5">
+                            <Form id="calculator-form">
+                                <Row>
+                                    <Col sm="12" md="6">
+                                        <FormGroup>
+                                            <Label for="amount">Amount, $</Label>
+                                            {/* eslint-disable-next-line max-len */}
+                                            <Input type="number" name="amount" id="amount" placeholder="" value={formModel.Amount} onChange={(e) => handleChangeSliderAmount(_.get(e, 'target.value', 0))} />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" md="6">
+                                        <FormGroup className="form-group-slider">
+                                            <Label for="amountSecondary" className="d-none">Amount, $</Label>
+                                            {/* eslint-disable-next-line max-len */}
+                                            <Slider id="amountSecondary" name="amountSecondary" {...limits} marks={{ [limits.min]: limits.min, [limits.max]: limits.max }} value={formModel.Amount} handle={handle} onChange={handleChangeSliderAmount} />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="12" md="6">
+                                        <FormGroup>
+                                            <Label for="powerAmount">Power amount, kwt</Label>
+                                            <Input type="text" name="powerAmount" id="powerAmount" placeholder="-" value={formModel.KilowattAmount} readOnly />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" md="6">
+                                        <FormGroup>
+                                            <Label for="paymentAmount">Payment Amount, $ (mon.)</Label>
+                                            <Input type="text" name="paymentAmount" id="paymentAmount" placeholder="-" value={formModel.PaymentAmount} readOnly />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="12" md="6">
+                                        <FormGroup>
+                                            <Label for="roi">ROI, %</Label>
+                                            <Input type="text" name="roi" id="roi" placeholder="-" value={formModel.Roi} readOnly />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" md="6">
+                                        <FormGroup>
+                                            <Label for="investmentReturn">Investment return</Label>
+                                            <Input type="text" name="investmentReturn" id="investmentReturn" placeholder="-" value={formModel.EndInvestmentDate} readOnly />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="12" md="6">
+                                        <FormGroup>
+                                            <Button className="btn btn-success" block onClick={() => console.log('Calculate')}>Buy</Button>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="12" md="6">
+                                        <FormGroup>
+                                            <Button className="btn btn-success" block onClick={() => console.log('Deposit')}>Deposit</Button>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </Col>
+                    </Row>
                 </CardBody>
             </Card>
-            <Modal modalClassName="InvestmentModal" isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>
-                    { _.get(station, 'StationName', 'Station Name') }
-                </ModalHeader>
-                <ModalBody>
-                    <Form>
-                        <Row>
-                            <Col sm="12" lg="6">
-                                <FormGroup>
-                                    <Label for="InvestmentAmount">{t('Investment Amount, $')}</Label>
-                                    {/* eslint-disable-next-line max-len */}
-                                    <NumericInput id="InvestmentAmount" name="InvestmentAmount" className="form-control" {...limits} value={formModel.Amount} onChange={handleChangeAmount} />
-                                </FormGroup>
-                            </Col>
-                            <Col sm="12" lg="6">
-                                <FormGroup>
-                                    <Label for="InvestmentAmountSecondary" className="d-none">Amount</Label>
-                                    {/* eslint-disable-next-line max-len */}
-                                    <Slider id="InvestmentAmountSecondary" name="InvestmentAmountSecondary" {...limits} value={formModel.Amount} onChange={handleChangeSliderAmount} />
-                                </FormGroup>
-                            </Col>
-                            <Col sm="12" lg="6">
-                                <FormGroup>
-                                    <Label for="PowerAmount">{t('Power Amount, kwt')}</Label>
-                                    <Input className="form-control" id="PowerAmount" name="PowerAmount" type="text" value={formModel.KilowattAmount} readOnly />
-                                </FormGroup>
-                            </Col>
-                            <Col sm="12" lg="6">
-                                <FormGroup>
-                                    <Label for="PaymentAmount">{t('Payment Amount, $ (monthly)')}</Label>
-                                    <Input className="form-control" id="PaymentAmount" name="PaymentAmount" type="text" value={formModel.PaymentAmount} readOnly />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </Form>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="success" onClick={doInvest} disabled={!investStatus}>{t('Invest')}</Button>
-                    {' '}
-                    <Button color="secondary" onClick={toggle}>{t('Cancel')}</Button>
-                </ModalFooter>
-            </Modal>
         </div>
     );
 }

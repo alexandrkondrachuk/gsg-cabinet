@@ -17,6 +17,7 @@ import { useIntl } from 'react-intl';
 import numeral from 'numeral';
 import { config } from '../../config';
 import { t } from '../../lang';
+import Types from '../../classes/Types';
 import UserInfoModel from '../../models/user-info-model';
 
 import avatarURL from '../../assets/images/icons/avatars/256_3.png';
@@ -24,8 +25,9 @@ import avatarURL from '../../assets/images/icons/avatars/256_3.png';
 import './Profile.scss';
 
 const numberFormat = config.get('numberFormat');
+const depositTab = Types.tabsMap.get(5);
 
-function Profile({ userInfo }) {
+function Profile({ userInfo, toggle }) {
     // @todo move variables to the model
     const login = _.get(userInfo, 'Email', 'user@gmail.com');
     const firstName = _.get(userInfo, 'FirstName', 'Dear');
@@ -37,8 +39,7 @@ function Profile({ userInfo }) {
     const intl = useIntl();
 
     const doDeposit = () => {
-        // @todo implement redirect to deposit page
-        console.log('Do deposit');
+        toggle(depositTab.id.toString());
     };
 
     const doChangePassword = (e) => {
@@ -189,6 +190,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Profile.propTypes = {
     userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
+    toggle: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -8,7 +8,7 @@ import Deposit from '../deposit';
 
 import './TabsRenderer.scss';
 
-export default function TabsRenderer({ tag }) {
+export default function TabsRenderer({ tag, toggle }) {
     const components = {
         profile: Profile,
         investments: Investments,
@@ -17,9 +17,10 @@ export default function TabsRenderer({ tag }) {
         deposit: Deposit,
     };
     const TagName = components[tag || 'profile'];
-    return <TagName />;
+    return <TagName toggle={toggle} />;
 }
 
 TabsRenderer.propTypes = {
     tag: PropTypes.oneOf(['profile', 'investments', 'purchase', 'history', 'deposit']).isRequired,
+    toggle: PropTypes.func.isRequired,
 };

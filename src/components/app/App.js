@@ -107,7 +107,7 @@ function App({
                         <TabContent className="App__TabContent" activeTab={activeTab}>
                             {Types.tabs.map((tab) => (
                                 <TabPane key={tab.id.toString()} tabId={tab.id.toString()}>
-                                    <TabsRenderer tag={tab.tagName} />
+                                    <TabsRenderer tag={tab.tagName} toggle={toggle} />
                                 </TabPane>
                             ))}
                         </TabContent>
