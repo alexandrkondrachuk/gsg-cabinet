@@ -8,6 +8,7 @@ const userDataURLs = _.get(urls, 'api.userDataURL');
 const contentPostsApiURL = _.get(urls, 'api.contentPostsApiURL');
 const stationsApiURL = _.get(urls, 'api.stationsApiURL');
 const createPurchaseURL = _.get(urls, 'api.createPurchaseURL');
+const changePasswordURL = _.get(urls, 'api.changePasswordURL');
 const categories = _.get(api, 'categories');
 
 export default class Transport {
@@ -71,6 +72,20 @@ export default class Transport {
             return status === Transport.STATUS_OK;
         } catch (e) {
             throw new Error(e);
+        }
+    }
+
+    // Change password
+    static async changePassword(model, token) {
+        if (!model || !token) return;
+        try {
+            const change = await axios.post(changePasswordURL, model, { headers: { Authorization: `Bearer ${token}` } });
+            const status = _.get(change, 'status');
+            // eslint-disable-next-line consistent-return
+            return (status === Transport.STATUS_OK);
+        } catch (e) {
+            // eslint-disable-next-line consistent-return
+            return e;
         }
     }
 }

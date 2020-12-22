@@ -40,5 +40,13 @@ export default {
         'Power Amount, kwt': 'Объем мощности, кВт',
         'Payment Amount, $ (monthly)': 'Сумма выплат, $ (мес.)',
         Cancel: 'Отмена',
+        Verification: 'Верификация',
+        'Document type : Passport': 'Тип документа: Паспорт',
+        'Please attach a scanned copy of your passport for user verification.': 'Приложите отсканированную копию своего паспорта для проверки пользователя.',
+        Upload: 'Загрузить',
+        'Password must be at least 6 characters and maximum 100': 'Пароль должен содержать как минимум 6 символов и максимум 100',
+        'Password and password confirmation do not match': 'Пароль и подтверждение пароля не совпадают',
+        'Incorrect password': 'Неверный пароль',
+        'Password changed successfully': 'Пароль успешно изменен',
     },
 };

@@ -17,6 +17,7 @@ config.set({
             createPurchaseURL: `${apiServer}api/Account/CreatePurchaseByUser`,
             userDataURL: `${apiServer}api/Account/GetUserData`,
             stationsApiURL: `${apiServer}api/PowerPlants/`,
+            changePasswordURL: `${apiServer}api/Account/ChangePassword`,
             contentPostsApiURL: `${server}wp-json/wp/v2/posts`,
         },
     },

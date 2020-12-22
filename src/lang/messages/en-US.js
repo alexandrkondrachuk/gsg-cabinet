@@ -40,5 +40,13 @@ export default {
         'Power Amount, kwt': 'Power Amount, kwt',
         'Payment Amount, $ (monthly)': 'Payment Amount, $ (monthly)',
         Cancel: 'Cancel',
+        Verification: 'Verification',
+        'Document type : Passport': 'Document type : Passport',
+        'Please attach a scanned copy of your passport for user verification.': 'Please attach a scanned copy of your passport for user verification.',
+        Upload: 'Upload',
+        'Password must be at least 6 characters and maximum 100': 'Password must be at least 6 characters and maximum 100',
+        'Password and password confirmation do not match': 'Password and password confirmation do not match',
+        'Incorrect password': 'Incorrect password',
+        'Password changed successfully': 'Password changed successfully',
     },
 };

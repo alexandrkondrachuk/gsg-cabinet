@@ -46,7 +46,7 @@
     height: 100%;
   }
 
-  #balance, #change-password {
+  #balance, #change-password, #verification {
     border-radius: 0;
     margin-bottom: 3px;
     @extend .font-mono-4;
@@ -98,6 +98,39 @@
       border-radius: 0;
       @extend .font-secondary;
     }
+
+    .form-group {
+      position: relative;
+    }
+
+    .password-visibility {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 30px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      color: var(--green);
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .error, .success {
+      @extend .font-mono-5;
+      text-align: center;
+    }
+
+    .error {
+      color: var(--red);
+    }
+
+    .success {
+      color: var(--green);
+    }
   }
 
   #changeProfile {
@@ -127,6 +160,64 @@
     .btn {
       border-radius: 0;
       @extend .font-secondary;
+    }
+  }
+
+  #verification-form {
+    label {
+      @extend .font-mono-2;
+      font-weight: 500;
+      color: var(--green);
+    }
+
+    input {
+      @extend .font-secondary;
+      border-radius: 0;
+      border-color: transparent;
+      min-height: response(45px);
+      color: var(--gray);
+      background-color: var(--bg-light);
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
+    #passport {
+      margin: response(15px) 0;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      &:hover {
+        cursor: pointer;
+      }
+      &:after {
+        content: '+';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @extend .font-primary;
+        background-color: var(--white);
+        border: 1px dashed var(--green);
+      }
+    }
+
+    .btn {
+      border-radius: 0;
+      @extend .font-secondary;
+    }
+
+    .form-text {
+      @extend .font-mono-5;
+      font-size: response(12px);
+      line-height: 1;
+      color: var(--gray-dark);
     }
   }
 
