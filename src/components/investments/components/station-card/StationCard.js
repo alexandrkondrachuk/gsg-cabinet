@@ -27,8 +27,7 @@ const limits = config.get('limits');
 const numberShortFormat = config.get('numberShortFormat');
 const numberFormat = config.get('numberFormat');
 
-export default function StationCard({ station, authInfo }) {
-    console.log('authInfo: ', authInfo);
+export default function StationCard({ station }) {
     const [formModel, setFormModel] = useState({
         KilowattAmount: 0,
         Amount: 0,
@@ -54,7 +53,7 @@ export default function StationCard({ station, authInfo }) {
         setPowerAmount(v);
     };
 
-    console.log('form model', formModel);
+    // console.log('form model', formModel);
 
     /*    const doInvest = async () => {
         const token = _.get(authInfo, 'access_token', null);

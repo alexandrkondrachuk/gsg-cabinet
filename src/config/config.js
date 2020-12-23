@@ -18,6 +18,7 @@ config.set({
             userDataURL: `${apiServer}api/Account/GetUserData`,
             stationsApiURL: `${apiServer}api/PowerPlants/`,
             changePasswordURL: `${apiServer}api/Account/ChangePassword`,
+            updateUserURL: `${apiServer}api/Account/UpdateUser`,
             contentPostsApiURL: `${server}wp-json/wp/v2/posts`,
         },
     },

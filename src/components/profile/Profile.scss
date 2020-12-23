@@ -148,6 +148,11 @@
         box-shadow: none;
         outline: none;
       }
+
+      &.error {
+        border-color: var(--red);
+        box-shadow: 0 10px 16px -16px var(--red);
+      }
     }
 
     label {
@@ -160,6 +165,52 @@
     .btn {
       border-radius: 0;
       @extend .font-secondary;
+    }
+
+    .form-group {
+      position: relative;
+      input, select {
+        color: rgba(0, 0, 0, .45);
+      }
+
+      &.editable {
+        input, select {
+          color: var(--dark);
+          box-shadow: 0 10px 16px -16px var(--dark);
+        }
+        .edit-field {
+          color: var(--dark);
+        }
+      }
+    }
+
+    .edit-field {
+      width: auto;
+      height: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate3d(0, 10px, 0);
+      color: var(--green);
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .message {
+      @extend .font-mono-5;
+
+      &-error {
+        color: var(--red);
+      }
+
+      &-success {
+        color: var(--green);
+      }
     }
   }
 

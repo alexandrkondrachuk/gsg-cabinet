@@ -48,5 +48,7 @@ export default {
         'Password and password confirmation do not match': 'Password and password confirmation do not match',
         'Incorrect password': 'Incorrect password',
         'Password changed successfully': 'Password changed successfully',
+        'Internal server error': 'Internal server error',
+        'Profile has been updated successfully': 'Profile has been updated successfully',
     },
 };

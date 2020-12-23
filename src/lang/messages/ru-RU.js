@@ -48,5 +48,7 @@ export default {
         'Password and password confirmation do not match': 'Пароль и подтверждение пароля не совпадают',
         'Incorrect password': 'Неверный пароль',
         'Password changed successfully': 'Пароль успешно изменен',
+        'Internal server error': 'Внутренняя ошибка сервера',
+        'Profile has been updated successfully': 'Профиль успешно обновлен',
     },
 };

@@ -9,6 +9,7 @@ const contentPostsApiURL = _.get(urls, 'api.contentPostsApiURL');
 const stationsApiURL = _.get(urls, 'api.stationsApiURL');
 const createPurchaseURL = _.get(urls, 'api.createPurchaseURL');
 const changePasswordURL = _.get(urls, 'api.changePasswordURL');
+const updateUserURL = _.get(urls, 'api.updateUserURL');
 const categories = _.get(api, 'categories');
 
 export default class Transport {
@@ -57,6 +58,20 @@ export default class Transport {
             return null;
         } catch (e) {
             throw new Error(e);
+        }
+    }
+
+    // Update user data
+    static async updateUserData(model, token) {
+        if (!model || !token) return;
+        try {
+            const update = await axios.post(updateUserURL, model, { headers: { Authorization: `Bearer ${token}` } });
+            const status = _.get(update, 'status');
+            // eslint-disable-next-line consistent-return
+            return (status === Transport.STATUS_OK);
+        } catch (e) {
+            // eslint-disable-next-line consistent-return
+            return e;
         }
     }
 
