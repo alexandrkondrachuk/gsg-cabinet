@@ -106,10 +106,18 @@
     .rc-slider-handle {
       border-color: var(--green);
     }
+
     .rc-slider-mark-text {
       @extend .font-mono-5;
+
+      &:first-of-type {
+        transform: translateX(calc(-50% + 5px)) !important;
+      }
+
       &:last-of-type {
         transform: translateX(-100%) !important;
+        width: 50%;
+        text-align: right;
       }
     }
   }
@@ -183,5 +191,32 @@
 
   .rangeslider__fill {
     background-color: var(--green);
+  }
+}
+
+.StationBuyModal {
+  .modal-title {
+    @extend .font-primary;
+    font-weight: 600;
+  }
+
+  .modal-content {
+    border-radius: 0;
+  }
+
+  .modal-body {
+    padding: response(30px);
+    @extend .font-mono-2;
+
+    .error {
+      color: var(--red);
+    }
+  }
+
+  .btn {
+    border-radius: 0;
+    width: response(125px);
+    height: response(45px);
+    @extend .font-secondary;
   }
 }

@@ -96,10 +96,11 @@ export default class Transport {
 
         try {
             const purchase = await axios.post(createPurchaseURL, model, { headers: { Authorization: `Bearer ${token}` } });
-            const status = _.get(purchase, 'status');
+            // const status = _.get(purchase, 'status');
+            const data = _.get(purchase, 'data');
 
             // eslint-disable-next-line consistent-return
-            return status === Transport.STATUS_OK;
+            return data;
         } catch (e) {
             throw new Error(e);
         }

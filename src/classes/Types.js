@@ -21,4 +21,9 @@ export default class Types {
     ];
 
     static tabsMap = Types.tabs.reduce((acc, item) => acc.set(item.id, { ...item }), new Map());
+
+    static purchaseErrors = {
+        InternalServerError: 'Internal server error',
+        'Insufficient funds': 'Insufficient funds',
+    };
 }

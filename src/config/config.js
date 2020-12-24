@@ -33,7 +33,7 @@ config.set({
     limits: {
         min: 0,
         max: 100000,
-        step: 1,
+        step: 100,
     },
     numberFormat: '0,0.00',
     numberParts: [',', ' '],

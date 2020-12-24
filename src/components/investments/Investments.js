@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import AuthInfoModel from '../../models/auth-info-model';
 import { StationCard } from './components';
 
-function Investments({ stations, authInfo }) {
+function Investments({ stations, authInfo, toggle }) {
     return (
         <div className="Investments">
             {(stations && stations.length) && (
-                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} />))
+                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} />))
             )}
         </div>
     );
@@ -34,6 +34,7 @@ Investments.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     stations: PropTypes.oneOfType([PropTypes.array, PropTypes.instanceOf(null)]),
     authInfo: PropTypes.instanceOf(AuthInfoModel).isRequired,
+    toggle: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Investments);
