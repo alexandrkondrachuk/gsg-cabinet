@@ -27,6 +27,10 @@ const initialState = new Record({
     stations: null,
 })();
 
+function updateUserInfo(prevModel, newModel) {
+    return new UserInfoModel(_.merge(prevModel, newModel));
+}
+
 const app = (state = initialState, action) => {
     switch (action.type) {
     case appActions.APP_CHANGE_LANG:
@@ -38,6 +42,8 @@ const app = (state = initialState, action) => {
         return state.merge({ userInfo: action.payload });
     case appActions.APP_GET_STATIONS:
         return state.merge({ stations: action.payload });
+    case appActions.APP_UPDATE_USER_INFO:
+        return state.merge({ userInfo: updateUserInfo(state.userInfo, action.payload) });
     default:
         return state;
     }

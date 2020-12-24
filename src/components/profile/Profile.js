@@ -10,19 +10,28 @@ import UserInfoModel from '../../models/user-info-model';
 import {
     Balance, Verification, PasswordChange, ProfileTitle, ProfileDetails,
 } from './components';
+import { app as appActions } from '../../store/actions';
 
 import './Profile.scss';
 
-function Profile({ userInfo, toggle, token }) {
+function Profile({
+    userInfo, toggle, token, dispatch,
+}) {
     const login = _.get(userInfo, 'Email', 'user@gmail.com');
     const firstName = _.get(userInfo, 'FirstName', 'Dear');
     const lastName = _.get(userInfo, 'LastName', 'User');
     const phoneNumber = _.get(userInfo, 'PhoneNumber', '');
     const balance = _.get(userInfo, 'Balance', 0);
     const sex = _.get(userInfo, 'Sex', 1);
+    const verification = _.get(userInfo, 'VerificationStatus', 0);
     let birthDate = _.get(userInfo, 'BirthDate');
     birthDate = (typeof birthDate !== 'string') ? '1970-01-01' : birthDate;
     birthDate = birthDate.includes('T') ? _.get(birthDate.split('T'), '[0]', '1970-01-01') : birthDate;
+
+    const doUpdateUserInfo = (model) => {
+        if (!model) return;
+        dispatch(appActions.updateUserInfo(model));
+    };
 
     return (
         <div className="Profile">
@@ -34,13 +43,21 @@ function Profile({ userInfo, toggle, token }) {
                                 <div className="Profile__Column">
                                     <ProfileTitle login={login} lastName={lastName} firstName={firstName} />
                                     <Balance balance={balance} toggle={toggle} />
-                                    <Verification />
+                                    <Verification verification={verification} token={token} updateUserInfo={doUpdateUserInfo} />
                                     <PasswordChange token={token} />
                                 </div>
                             </Col>
                             <Col md="12" lg="7">
                                 <div className="Profile__Column">
-                                    <ProfileDetails phoneNumber={phoneNumber} birthDate={birthDate} lastName={lastName} firstName={firstName} sex={sex} token={token} />
+                                    <ProfileDetails
+                                        phoneNumber={phoneNumber}
+                                        birthDate={birthDate}
+                                        lastName={lastName}
+                                        firstName={firstName}
+                                        sex={sex}
+                                        token={token}
+                                        updateUserInfo={doUpdateUserInfo}
+                                    />
                                 </div>
                             </Col>
                         </Row>
@@ -65,6 +82,7 @@ Profile.propTypes = {
     userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
     token: PropTypes.string.isRequired,
     toggle: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

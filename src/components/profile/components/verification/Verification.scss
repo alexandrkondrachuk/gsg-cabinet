@@ -1,0 +1,38 @@
+@import "../../../../assets/scss/utilities/variables";
+@import "../../../../assets/scss/utilities/functions";
+@import "../../../../assets/scss/base/typography";
+
+.Verification {
+  width: 100%;
+  transform: translate3d(0, -0.125rem, 0);
+
+  .selected-img {
+    margin: response(15px) 0;
+    padding: response(15px);
+    border: 1px dashed var(--green);
+  }
+
+  .btn-alert {
+    background-color: var(--yellow);
+    border-color: var(--yellow);
+    color: var(--white);
+
+    &:focus, &:active, &:hover {
+      background-color: var(--orange) !important;
+      border-color: var(--orange) !important;
+      color: var(--white) !important;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem var(--yellow);
+    }
+  }
+
+  .verification-text {
+    margin: response(15px) 0;
+    padding: response(15px);
+    border: 1px dashed var(--green);
+    @extend .font-mono-2;
+    color: var(--dark);
+  }
+}

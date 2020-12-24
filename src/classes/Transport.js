@@ -10,6 +10,7 @@ const stationsApiURL = _.get(urls, 'api.stationsApiURL');
 const createPurchaseURL = _.get(urls, 'api.createPurchaseURL');
 const changePasswordURL = _.get(urls, 'api.changePasswordURL');
 const updateUserURL = _.get(urls, 'api.updateUserURL');
+const uploadUserFileUrl = _.get(urls, 'api.uploadUserFileUrl');
 const categories = _.get(api, 'categories');
 
 export default class Transport {
@@ -67,6 +68,20 @@ export default class Transport {
         try {
             const update = await axios.post(updateUserURL, model, { headers: { Authorization: `Bearer ${token}` } });
             const status = _.get(update, 'status');
+            // eslint-disable-next-line consistent-return
+            return (status === Transport.STATUS_OK);
+        } catch (e) {
+            // eslint-disable-next-line consistent-return
+            return e;
+        }
+    }
+
+    // Upload user verification file
+    static async uploadUserFile(model, token) {
+        if (!model || !token) return;
+        try {
+            const upload = await axios.post(uploadUserFileUrl, model, { headers: { Authorization: `Bearer ${token}` } });
+            const status = _.get(upload, 'status');
             // eslint-disable-next-line consistent-return
             return (status === Transport.STATUS_OK);
         } catch (e) {

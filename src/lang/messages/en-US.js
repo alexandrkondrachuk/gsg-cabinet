@@ -50,5 +50,7 @@ export default {
         'Password changed successfully': 'Password changed successfully',
         'Internal server error': 'Internal server error',
         'Profile has been updated successfully': 'Profile has been updated successfully',
+        'The previously uploaded document is being reviewed.': 'The previously uploaded document is being reviewed.',
+        'Verification passed successfully': 'Verification passed successfully',
     },
 };

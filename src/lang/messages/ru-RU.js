@@ -50,5 +50,7 @@ export default {
         'Password changed successfully': 'Пароль успешно изменен',
         'Internal server error': 'Внутренняя ошибка сервера',
         'Profile has been updated successfully': 'Профиль успешно обновлен',
+        'The previously uploaded document is being reviewed.': 'Ранее загруженный документ находиться на проверке.',
+        'Verification passed successfully': 'Верификация успешно пройдена',
     },
 };

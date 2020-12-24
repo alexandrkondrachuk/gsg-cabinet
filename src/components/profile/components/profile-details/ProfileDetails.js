@@ -14,7 +14,7 @@ import Transport from '../../../../classes/Transport';
 import ProfileDetailsModel from '../../../../models/profile-details-model';
 
 export default function ProfileDetails({
-    firstName: FirstName, lastName: LastName, phoneNumber: PhoneNumber, birthDate: BirthDate, sex: Sex, token,
+    firstName: FirstName, lastName: LastName, phoneNumber: PhoneNumber, birthDate: BirthDate, sex: Sex, token, updateUserInfo,
 }) {
     const intl = useIntl();
     const [profileDetails, setProfileDetails] = useState(new ProfileDetailsModel({
@@ -63,6 +63,7 @@ export default function ProfileDetails({
         const update = await Transport.updateUserData(profileDetails, token);
         if (typeof update === 'boolean') {
             setResultSuccess(true);
+            updateUserInfo(profileDetails);
         } else {
             setResultError(true);
         }
@@ -203,4 +204,5 @@ ProfileDetails.propTypes = {
     birthDate: PropTypes.string.isRequired,
     sex: PropTypes.number.isRequired,
     token: PropTypes.string.isRequired,
+    updateUserInfo: PropTypes.func.isRequired,
 };

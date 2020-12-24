@@ -13,6 +13,7 @@ export default class UserInfoModel extends BaseModel {
         this.PhoneNumber = '';
         this.Sex = 1;
         this.UserName = '';
+        this.VerificationStatus = 0;
 
         this.copyFrom(initData);
     }
