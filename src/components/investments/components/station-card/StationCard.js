@@ -13,8 +13,11 @@ import AuthInfoModel from '../../../../models/auth-info-model';
 import Transport from '../../../../classes/Transport';
 
 import './StationCard.scss';
+import UserInfoModel from '../../../../models/user-info-model';
 
-export default function StationCard({ station, toggle, authInfo }) {
+export default function StationCard({
+    station, toggle, authInfo, userInfo,
+}) {
     const [calculatorModel, setCalculatorModel] = useState(new StationCalculatorModel());
     const setCalculatorModelValue = (newState = null) => {
         if (!newState) return;
@@ -51,6 +54,7 @@ export default function StationCard({ station, toggle, authInfo }) {
                         <Col sm="12" md="5">
                             <StationCalculator
                                 model={calculatorModel}
+                                userInfo={userInfo}
                                 station={station}
                                 setModelValue={setCalculatorModelValue}
                                 toggle={toggle}
@@ -68,5 +72,6 @@ StationCard.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     station: PropTypes.object.isRequired,
     authInfo: PropTypes.instanceOf(AuthInfoModel).isRequired,
+    userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
     toggle: PropTypes.func.isRequired,
 };

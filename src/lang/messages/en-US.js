@@ -62,5 +62,6 @@ export default {
         'Do you confirm your investment in the {name} of the {amount} $ ?': 'Do you confirm your investment in the {name} of the {amount} $ ?',
         Confirm: 'Confirm',
         'Insufficient funds': 'Insufficient funds',
+        'Your investment has been successfully accepted': 'Your investment has been successfully accepted',
     },
 };

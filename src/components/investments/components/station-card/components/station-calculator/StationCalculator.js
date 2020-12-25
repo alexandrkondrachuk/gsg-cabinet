@@ -12,6 +12,7 @@ import { config } from '../../../../../../config';
 import { t } from '../../../../../../lang';
 import StationCalculatorModel from '../../../../../../models/station-calculator-model';
 import Types from '../../../../../../classes/Types';
+import UserInfoModel from '../../../../../../models/user-info-model';
 
 const depositTab = Types.tabsMap.get(5);
 const limits = config.get('limits');
@@ -20,12 +21,14 @@ const numberFormat = config.get('numberFormat');
 const { purchaseErrors } = Types;
 
 export default function StationCalculator({
-    model, setModelValue, station, toggle: togglePage, doInvest,
+    model, userInfo, setModelValue, station, toggle: togglePage, doInvest,
 }) {
     const intl = useIntl();
+    const initInfo = { type: 'error', message: '', show: false };
     const [modal, setModal] = useState(false);
-    const [info, setInfo] = useState({ type: 'error', message: '', show: false });
+    const [info, setInfo] = useState(initInfo);
     const toggle = () => setModal(!modal);
+    const balance = _.get(userInfo, 'Balance', 0);
 
     const { Handle } = Slider;
 
@@ -69,16 +72,26 @@ export default function StationCalculator({
         togglePage(depositTab.id.toString());
     };
 
+    const resetResult = (timeout = 5000) => {
+        _.delay(() => {
+            toggle();
+            setInfo({ ...initInfo });
+        }, timeout);
+    };
+
     const invest = async () => {
         const result = await doInvest();
         const message = _.get(result, 'Message', null);
         if (message) {
             setInfo({ ...info, message: intl.formatMessage({ id: purchaseErrors[message] }), show: true });
         }
-        if (typeof result === 'number') console.log('Success');
+        if (typeof result === 'number') {
+            setInfo({
+                ...info, message: intl.formatMessage({ id: 'Your investment has been successfully accepted' }), type: 'success', show: true,
+            });
+        }
+        resetResult();
     };
-
-    console.log('info', info);
 
     return (
         <>
@@ -130,7 +143,8 @@ export default function StationCalculator({
                 <Row>
                     <Col sm="12" md="6">
                         <FormGroup>
-                            <Button className="btn btn-success" block onClick={toggle}>{ t('Buy') }</Button>
+                            {/* eslint-disable-next-line max-len */}
+                            <Button className="btn btn-success" block onClick={toggle} disabled={(balance <= 0) || (+(_.get(model, 'Amount')) === 0) || (+(_.get(model, 'Amount')) > balance)}>{ t('Buy') }</Button>
                         </FormGroup>
                     </Col>
                     <Col sm="12" md="6">
@@ -165,6 +179,7 @@ export default function StationCalculator({
 StationCalculator.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     model: PropTypes.object.isRequired,
+    userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
     setModelValue: PropTypes.func.isRequired,
     // eslint-disable-next-line react/forbid-prop-types
     station: PropTypes.object.isRequired,

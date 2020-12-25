@@ -5,12 +5,15 @@ import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AuthInfoModel from '../../models/auth-info-model';
 import { StationCard } from './components';
+import UserInfoModel from '../../models/user-info-model';
 
-function Investments({ stations, authInfo, toggle }) {
+function Investments({
+    stations, authInfo, userInfo, toggle,
+}) {
     return (
         <div className="Investments">
             {(stations && stations.length) && (
-                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} />))
+                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} userInfo={userInfo} />))
             )}
         </div>
     );
@@ -19,7 +22,8 @@ function Investments({ stations, authInfo, toggle }) {
 const mapStateToProps = (state) => {
     const stations = _.get(state.app, 'stations');
     const authInfo = _.get(state.app, 'authInfo');
-    return { stations, authInfo };
+    const userInfo = _.get(state.app, 'userInfo');
+    return { stations, authInfo, userInfo };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -35,6 +39,7 @@ Investments.propTypes = {
     stations: PropTypes.oneOfType([PropTypes.array, PropTypes.instanceOf(null)]),
     authInfo: PropTypes.instanceOf(AuthInfoModel).isRequired,
     toggle: PropTypes.func.isRequired,
+    userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Investments);
