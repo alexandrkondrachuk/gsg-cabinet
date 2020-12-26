@@ -16,7 +16,7 @@ import './StationCard.scss';
 import UserInfoModel from '../../../../models/user-info-model';
 
 export default function StationCard({
-    station, toggle, authInfo, userInfo,
+    station, toggle, authInfo, userInfo, lang,
 }) {
     const [calculatorModel, setCalculatorModel] = useState(new StationCalculatorModel());
     const setCalculatorModelValue = (newState = null) => {
@@ -49,7 +49,7 @@ export default function StationCard({
                 <CardBody>
                     <Row className="StationCard__Row">
                         <Col sm="12" md="7">
-                            <StationChart />
+                            <StationChart model={calculatorModel} lang={lang} />
                         </Col>
                         <Col sm="12" md="5">
                             <StationCalculator
@@ -74,4 +74,5 @@ StationCard.propTypes = {
     authInfo: PropTypes.instanceOf(AuthInfoModel).isRequired,
     userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
     toggle: PropTypes.func.isRequired,
+    lang: PropTypes.string.isRequired,
 };

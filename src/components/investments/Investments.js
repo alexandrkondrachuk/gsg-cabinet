@@ -8,12 +8,12 @@ import { StationCard } from './components';
 import UserInfoModel from '../../models/user-info-model';
 
 function Investments({
-    stations, authInfo, userInfo, toggle,
+    stations, authInfo, userInfo, toggle, lang,
 }) {
     return (
         <div className="Investments">
             {(stations && stations.length) && (
-                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} userInfo={userInfo} />))
+                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} userInfo={userInfo} lang={lang} />))
             )}
         </div>
     );
@@ -23,7 +23,10 @@ const mapStateToProps = (state) => {
     const stations = _.get(state.app, 'stations');
     const authInfo = _.get(state.app, 'authInfo');
     const userInfo = _.get(state.app, 'userInfo');
-    return { stations, authInfo, userInfo };
+    const lang = _.get(state.app, 'lang');
+    return {
+        stations, authInfo, userInfo, lang,
+    };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,6 +43,7 @@ Investments.propTypes = {
     authInfo: PropTypes.instanceOf(AuthInfoModel).isRequired,
     toggle: PropTypes.func.isRequired,
     userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
+    lang: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Investments);

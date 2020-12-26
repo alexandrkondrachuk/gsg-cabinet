@@ -1,0 +1,15 @@
+@import "../../../../../../assets/scss/utilities/variables";
+@import "../../../../../../assets/scss/utilities/functions";
+@import "../../../../../../assets/scss/base/typography";
+
+.StationChart {
+  overflow-y: hidden;
+  overflow-x: auto;
+  &__Container {
+    width: 100%;
+    height: auto;
+    @include media-breakpoint-down(md) {
+      width: 768px;
+    }
+  }
+}
