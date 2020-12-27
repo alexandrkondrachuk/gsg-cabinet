@@ -10,7 +10,7 @@ export default class Types {
             id: 2, name: 'Investments', tagName: 'investments', icon: 'faMoneyCheck',
         },
         {
-            id: 3, name: 'Purchase', tagName: 'purchase', icon: 'faDollarSign',
+            id: 3, name: 'Purchases', tagName: 'purchase', icon: 'faDollarSign',
         },
         {
             id: 4, name: 'History', tagName: 'history', icon: 'faHistory',
@@ -25,5 +25,12 @@ export default class Types {
     static purchaseErrors = {
         InternalServerError: 'Internal server error',
         'Insufficient funds': 'Insufficient funds',
+    };
+
+    static operationType = {
+        1: 'Deposit',
+        2: 'Withdrawal',
+        3: 'Purchase',
+        4: 'Dividend',
     };
 }

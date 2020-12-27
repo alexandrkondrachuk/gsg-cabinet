@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import * as cn from 'classnames';
 import { t } from '../../lang';
 import bitcoin from '../../assets/images/icons/bitcoin.svg';
 import Transport from '../../classes/Transport';
@@ -17,6 +18,7 @@ import './Deposit.scss';
 
 function Deposit({ token, BTCAddress, dispatch }) {
     const [BTCStatus, setBTCStatus] = useState(false);
+    const [copy, setCopy] = useState(false);
     const getBTCAddress = async (e) => {
         setBTCStatus(!BTCStatus);
         e.preventDefault();
@@ -26,7 +28,7 @@ function Deposit({ token, BTCAddress, dispatch }) {
         }));
     };
     const copyBTCAddress = () => {
-        console.log('Copy BTC Address');
+        setCopy(true);
     };
     return (
         <div className="Deposit">
@@ -45,7 +47,7 @@ function Deposit({ token, BTCAddress, dispatch }) {
                                 <FormGroup>
                                     <Button disabled={BTCStatus || !!BTCAddress}>{ t('Generate') }</Button>
                                     <CopyToClipboard text={BTCAddress} onCopy={copyBTCAddress}>
-                                        <Button>{ t('Copy') }</Button>
+                                        <Button className={cn({ copied: copy })}>{ copy ? t('Copied') : t('Copy') }</Button>
                                     </CopyToClipboard>
                                 </FormGroup>
                             </Form>

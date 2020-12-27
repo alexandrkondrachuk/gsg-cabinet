@@ -68,9 +68,16 @@
       @extend .font-mono-4;
       font-weight: 500;
       color: var(--dark);
+      transition: all .25s linear;
 
       &:first-of-type {
         margin-right: response(15px);
+      }
+
+      &.copied {
+        box-shadow: 0 0 0.75rem 0.125rem var(--green);
+        color: var(--green);
+        border-color: var(--green);
       }
     }
 

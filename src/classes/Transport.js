@@ -12,6 +12,7 @@ const changePasswordURL = _.get(urls, 'api.changePasswordURL');
 const updateUserURL = _.get(urls, 'api.updateUserURL');
 const uploadUserFileUrl = _.get(urls, 'api.uploadUserFileUrl');
 const getBTCAddressURL = _.get(urls, 'api.getBTCAddressURL');
+const getFinancialOperationURL = _.get(urls, 'api.getFinancialOperationURL');
 const categories = _.get(api, 'categories');
 
 export default class Transport {
@@ -70,6 +71,24 @@ export default class Transport {
             const BTCAddress = await axios.get(getBTCAddressURL, { headers: { Authorization: `Bearer ${token}` } });
             const status = _.get(BTCAddress, 'status');
             const data = _.get(BTCAddress, 'data');
+            if (status === Transport.STATUS_OK) {
+                // eslint-disable-next-line consistent-return
+                return data;
+            }
+            // eslint-disable-next-line consistent-return
+            return null;
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    // Get financial operations
+    static async getFinancialOperations(token = null) {
+        if (!token) return;
+        try {
+            const financialOperations = await axios.get(getFinancialOperationURL, { headers: { Authorization: `Bearer ${token}` } });
+            const status = _.get(financialOperations, 'status');
+            const data = _.get(financialOperations, 'data');
             if (status === Transport.STATUS_OK) {
                 // eslint-disable-next-line consistent-return
                 return data;

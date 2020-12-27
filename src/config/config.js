@@ -21,6 +21,7 @@ config.set({
             updateUserURL: `${apiServer}api/Account/UpdateUser`,
             uploadUserFileUrl: `${apiServer}api/Account/UploadUserFile`,
             getBTCAddressURL: `${apiServer}api/Account/GetBTCAddress`,
+            getFinancialOperationURL: `${apiServer}api/Account/GetAccountFinancialOperations`,
             contentPostsApiURL: `${server}wp-json/wp/v2/posts`,
         },
     },
@@ -31,6 +32,7 @@ config.set({
         redirectAfterAuth: 5 * 1000,
     },
     dateFormat: 'DD.MM.YYYY',
+    dateFormatLong: 'DD.MM.YYYY hh:mm:ss',
     limits: {
         min: 0,
         max: 100000,
