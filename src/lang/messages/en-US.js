@@ -78,5 +78,7 @@ export default {
         Withdrawal: 'Withdrawal',
         Purchase: 'Purchase',
         Dividend: 'Dividend',
+        'My purchases': 'My purchases',
+        'No data available': 'No data available',
     },
 };

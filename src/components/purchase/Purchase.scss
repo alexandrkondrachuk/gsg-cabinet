@@ -1,1 +1,15 @@
-.Purchase {}
+@import "../../assets/scss/utilities/variables";
+@import "../../assets/scss/utilities/functions";
+@import "../../assets/scss/base/typography";
+
+.Purchase {
+  margin: response(20px) 0 response(45px) 0;
+  width: 100%;
+
+  &__Title {
+    margin-bottom: response(15px);
+    @extend .font-mono-1;
+    text-align: center;
+    color: var(--green);
+  }
+}

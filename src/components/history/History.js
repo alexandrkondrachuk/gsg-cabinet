@@ -71,7 +71,7 @@ function History({ token }) {
                         ))}
                         {!operations && (
                             <div className="Table_Row">
-                                <div className="Table_Cell">No data</div>
+                                <div className="Table_Cell">{t('No data available')}</div>
                             </div>
                         )}
                     </Scrollbars>

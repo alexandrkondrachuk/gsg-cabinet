@@ -40,8 +40,11 @@
     }
 
     .form-text {
+      padding: response(6px);
       @extend .font-mono-1;
+      font-weight: 500;
       color: var(--white) !important;
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     #BTCAddress {
@@ -49,12 +52,12 @@
       height: response(45px);
       border-radius: 0;
       @extend .font-mono-2;
-      background-color: rgba(255, 255, 255, 0.65);
-      border-color: rgba(255, 255, 255, 0.65);
-      box-shadow: 0 0 0.75rem 0.25rem rgba(255, 255, 255, 0.65);
+      background-color: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0.75rem 0.25rem rgba(255, 255, 255, 0.9);
 
       &:focus {
-        box-shadow: 0 0 0.75rem 0.25rem rgba(255, 255, 255, 0.65);
+        box-shadow: 0 0 0.75rem 0.25rem rgba(255, 255, 255, 0.9);
       }
     }
 
@@ -62,9 +65,9 @@
       width: response(175px);
       height: response(45px);
       border-radius: 0;
-      border-color: rgba(255, 255, 255, 0.65);
-      background-color: rgba(255, 255, 255, 0.65);
-      box-shadow: 0 0 0.75rem 0.125rem rgba(255, 255, 255, 0.65);
+      border-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0.75rem 0.125rem rgba(255, 255, 255, 0.9);
       @extend .font-mono-4;
       font-weight: 500;
       color: var(--dark);
