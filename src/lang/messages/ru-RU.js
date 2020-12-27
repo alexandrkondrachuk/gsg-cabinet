@@ -63,5 +63,9 @@ export default {
         Confirm: 'Подтвердить',
         'Insufficient funds': 'Недостаточно средств',
         'Your investment has been successfully accepted': 'Ваша инвестиция удачно прийнята',
+        'Generate BTC address': 'Сгенерировать адрес BTC',
+        Generate: 'Сгенерировать',
+        Copy: 'Копировать',
+        'BTC Address': 'BTC адрес',
     },
 };

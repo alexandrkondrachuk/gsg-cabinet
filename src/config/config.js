@@ -20,6 +20,7 @@ config.set({
             changePasswordURL: `${apiServer}api/Account/ChangePassword`,
             updateUserURL: `${apiServer}api/Account/UpdateUser`,
             uploadUserFileUrl: `${apiServer}api/Account/UploadUserFile`,
+            getBTCAddressURL: `${apiServer}api/Account/GetBTCAddress`,
             contentPostsApiURL: `${server}wp-json/wp/v2/posts`,
         },
     },

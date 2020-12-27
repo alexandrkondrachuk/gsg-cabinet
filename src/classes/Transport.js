@@ -11,6 +11,7 @@ const createPurchaseURL = _.get(urls, 'api.createPurchaseURL');
 const changePasswordURL = _.get(urls, 'api.changePasswordURL');
 const updateUserURL = _.get(urls, 'api.updateUserURL');
 const uploadUserFileUrl = _.get(urls, 'api.uploadUserFileUrl');
+const getBTCAddressURL = _.get(urls, 'api.getBTCAddressURL');
 const categories = _.get(api, 'categories');
 
 export default class Transport {
@@ -51,6 +52,24 @@ export default class Transport {
             const userData = await axios.get(userDataURLs, { headers: { Authorization: `Bearer ${token}` } });
             const status = _.get(userData, 'status');
             const data = _.get(userData, 'data');
+            if (status === Transport.STATUS_OK) {
+                // eslint-disable-next-line consistent-return
+                return data;
+            }
+            // eslint-disable-next-line consistent-return
+            return null;
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    // Get BTCAddress
+    static async getBTCAddress(token = null) {
+        if (!token) return;
+        try {
+            const BTCAddress = await axios.get(getBTCAddressURL, { headers: { Authorization: `Bearer ${token}` } });
+            const status = _.get(BTCAddress, 'status');
+            const data = _.get(BTCAddress, 'data');
             if (status === Transport.STATUS_OK) {
                 // eslint-disable-next-line consistent-return
                 return data;

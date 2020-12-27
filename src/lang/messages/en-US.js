@@ -63,5 +63,9 @@ export default {
         Confirm: 'Confirm',
         'Insufficient funds': 'Insufficient funds',
         'Your investment has been successfully accepted': 'Your investment has been successfully accepted',
+        'Generate BTC address': 'Generate BTC address',
+        Generate: 'Generate',
+        Copy: 'Copy',
+        'BTC Address': 'BTC Address',
     },
 };
