@@ -15,7 +15,7 @@ export default {
         'Old Password': 'Прежний пароль',
         'New Password': 'Новый пароль',
         'Repeat New Password': 'Повторите новый пароль',
-        'Change Password': 'Измени пароль',
+        'Change Password': 'Изменить пароль',
         'Profile details': 'Детали профиля',
         'First Name': 'Имя',
         'Last Name': 'Фамилия',
