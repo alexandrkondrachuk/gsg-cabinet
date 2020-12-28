@@ -1,1 +1,14 @@
-.Investments {}
+@import "../../assets/scss/utilities/variables";
+@import "../../assets/scss/utilities/functions";
+@import "../../assets/scss/base/typography";
+
+.Investments {
+  margin: response(45px) 0;
+
+  &__Title {
+    margin-bottom: response(15px);
+    @extend .font-mono-1;
+    text-align: center;
+    color: var(--green);
+  }
+}

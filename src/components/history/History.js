@@ -26,7 +26,7 @@ function History({ token }) {
         const operationsModels = historyResponse.map((operation) => (new OperationModel(operation)));
         setOperations(operationsModels);
     }, [token]);
-    const formatNumber = (value) => (numeral(value).format(numberFormat).replace(/ /g, ''));
+    const formatNumber = (value) => (numeral(value).format(numberFormat).replace(/,/g, ' '));
     return (
         <div className="History container">
             <h2 className="History__Title">{t('History of financial transactions')}</h2>
@@ -35,9 +35,20 @@ function History({ token }) {
                     <div className="Table_Cell Table_Cell_SM">#</div>
                     <div className="Table_Cell">{t('Type of transaction')}</div>
                     <div className="Table_Cell">{t('Power station')}</div>
-                    <div className="Table_Cell">{t('Purchased power')}</div>
-                    <div className="Table_Cell">{t('Price')}</div>
-                    <div className="Table_Cell">{t('Amount')}</div>
+                    <div className="Table_Cell">
+                        {t('Purchased power')}
+                        ,
+                        {' '}
+                        {t('kwt')}
+                    </div>
+                    <div className="Table_Cell">
+                        {t('Price')}
+                        , $
+                    </div>
+                    <div className="Table_Cell">
+                        {t('Amount')}
+                        , $
+                    </div>
                     <div className="Table_Cell">{t('Date of operation')}</div>
                 </div>
                 <div className="Table_Body">

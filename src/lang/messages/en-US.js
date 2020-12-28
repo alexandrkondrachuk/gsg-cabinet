@@ -80,5 +80,13 @@ export default {
         Dividend: 'Dividend',
         'My purchases': 'My purchases',
         'No data available': 'No data available',
+        'Investment amount': 'Investment amount',
+        Details: 'Details',
+        kwt: 'kwt',
+        Look: 'Look',
+        'Dividends list': 'Dividends list',
+        Close: 'Close',
+        'Affordable investment': 'Affordable investment',
+        'Profile settings': 'Profile settings',
     },
 };

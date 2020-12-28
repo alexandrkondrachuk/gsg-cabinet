@@ -80,5 +80,13 @@ export default {
         Dividend: 'Дивиденды',
         'My purchases': 'Мои покупки',
         'No data available': 'Нет доступных данных',
+        'Investment amount': 'Сумма инвестиции',
+        Details: 'Детали',
+        kwt: 'кВт',
+        Look: 'Посмотреть',
+        'Dividends list': 'Список дивидендов',
+        Close: 'Закрыть',
+        'Affordable investment': 'Доступные инвестиции',
+        'Profile settings': 'Настройки профиля',
     },
 };

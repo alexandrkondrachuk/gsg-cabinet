@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as PropTypes from 'prop-types';
 import {
     Button, Col, Form, FormGroup, Input, Label, Row,
@@ -57,16 +57,20 @@ export default function StationCalculator({
         // eslint-disable-next-line no-nested-ternary
         const pricePerKW = _.get(station, 'PricePerKW');
         const paymentPerKW = _.get(station, 'PaymentPerKW');
-        const KilowattAmount = +(v / pricePerKW).toFixed(2);
+        const KilowattAmount = +(v / pricePerKW).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
         const paymentAmount = +(KilowattAmount * paymentPerKW).toFixed(2);
         const PaymentAmount = numeral(paymentAmount).format(numberFormat).replace(',', ' ');
-        let InvestmentReturn = +(v / paymentAmount).toFixed(2);
+        let InvestmentReturn = Math.ceil(+(v / paymentAmount));
         // eslint-disable-next-line no-restricted-globals
         InvestmentReturn = isNaN(InvestmentReturn) ? 0 : InvestmentReturn;
         setModelValue(new StationCalculatorModel({
             Amount: `${v}`, Roi: _.get(station, 'Roi', 0), PaymentAmount, KilowattAmount, InvestmentReturn,
         }));
     };
+
+    useEffect(() => {
+        handleChangeSliderAmount(config.get('defaultInvestAmount'));
+    }, []);
 
     const doDeposit = () => {
         togglePage(depositTab.id.toString());

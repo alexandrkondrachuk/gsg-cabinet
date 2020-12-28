@@ -13,6 +13,7 @@ import {
 import { app as appActions } from '../../store/actions';
 
 import './Profile.scss';
+import { t } from '../../lang';
 
 function Profile({
     userInfo, toggle, token, dispatch,
@@ -35,6 +36,7 @@ function Profile({
 
     return (
         <div className="Profile">
+            <h2 className="Profile__Title">{t('Profile settings')}</h2>
             <Container>
                 <Card className="Profile__Card">
                     <CardBody>

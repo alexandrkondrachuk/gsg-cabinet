@@ -6,12 +6,14 @@ import { connect } from 'react-redux';
 import AuthInfoModel from '../../models/auth-info-model';
 import { StationCard } from './components';
 import UserInfoModel from '../../models/user-info-model';
+import { t } from '../../lang';
 
 function Investments({
     stations, authInfo, userInfo, toggle, lang,
 }) {
     return (
         <div className="Investments">
+            <h2 className="Investments__Title">{t('Affordable investment')}</h2>
             {(stations && stations.length) && (
                 stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} userInfo={userInfo} lang={lang} />))
             )}
