@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import * as _ from 'lodash';
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,10 +7,10 @@ import numeral from 'numeral';
 import { Scrollbars } from 'react-custom-scrollbars';
 import * as cn from 'classnames';
 import Transport from '../../classes/Transport';
-import OperationModel from '../../models/operation-model';
 import { t } from '../../lang';
 import Types from '../../classes/Types';
 import { config } from '../../config';
+import { app as appActions } from '../../store/actions';
 
 import './History.scss';
 
@@ -19,12 +19,10 @@ const numberFormat = config.get('numberFormat');
 
 const operationTypes = Types.operationType;
 
-function History({ token }) {
-    const [operations, setOperations] = useState(null);
+function History({ token, dispatch, operations }) {
     useEffect(async () => {
         const historyResponse = await Transport.getFinancialOperations(token);
-        const operationsModels = historyResponse.map((operation) => (new OperationModel(operation)));
-        setOperations(operationsModels);
+        dispatch(appActions.setHistory(historyResponse));
     }, [token]);
     const formatNumber = (value) => (numeral(value).format(numberFormat).replace(/,/g, ' '));
     return (
@@ -80,7 +78,7 @@ function History({ token }) {
                                 </div>
                             </div>
                         ))}
-                        {!operations && (
+                        {(operations.length === 0) && (
                             <div className="Table_Row">
                                 <div className="Table_Cell">{t('No data available')}</div>
                             </div>
@@ -94,7 +92,8 @@ function History({ token }) {
 
 const mapStateToProps = (state) => {
     const token = _.get(state.app, 'authInfo.access_token');
-    return { token };
+    const operations = _.get(state.app, 'history', []);
+    return { token, operations };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -103,7 +102,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 History.propTypes = {
     token: PropTypes.string.isRequired,
-    // dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+    operations: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(History);

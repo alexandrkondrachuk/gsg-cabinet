@@ -62,7 +62,7 @@ export default {
         'Do you confirm your investment in the {name} of the {amount} $ ?': 'Вы подтверждаете вашу инвестицию в {name} в размере {amount} $ ?',
         Confirm: 'Подтвердить',
         'Insufficient funds': 'Недостаточно средств',
-        'Your investment has been successfully accepted': 'Ваша инвестиция удачно прийнята',
+        'Your investment has been successfully accepted': 'Ваша инвестиция удачно принята',
         'Generate BTC address': 'Сгенерировать адрес BTC',
         Generate: 'Сгенерировать',
         Copy: 'Копировать',

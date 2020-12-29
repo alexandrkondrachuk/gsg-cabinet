@@ -6,6 +6,8 @@ export const APP_CHANGE_LANG_REJECTED = 'APP_CHANGE_LANG_REJECTED';
 export const APP_GET_USER_INFO = 'APP_GET_USER_INFO';
 export const APP_UPDATE_USER_INFO = 'APP_UPDATE_USER_INFO';
 export const APP_GET_STATIONS = 'APP_GET_STATIONS';
+export const APP_SET_PURCHASES = 'APP_SET_PURCHASES';
+export const APP_SET_HISTORY = 'APP_SET_HISTORY';
 
 export function changeLang(payload = LOCALES.en) {
     return {
@@ -50,6 +52,20 @@ export function updateUserInfo(model = null) {
 export function getStations(payload = null) {
     return {
         type: APP_GET_STATIONS,
+        payload,
+    };
+}
+
+export function setPurchases(payload = null) {
+    return {
+        type: APP_SET_PURCHASES,
+        payload,
+    };
+}
+
+export function setHistory(payload = null) {
+    return {
+        type: APP_SET_HISTORY,
         payload,
     };
 }

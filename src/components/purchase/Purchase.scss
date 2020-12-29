@@ -157,6 +157,7 @@
       width: 100%;
       height: auto;
       display: flex;
+      flex-direction: column;
 
       &_El {
         margin-bottom: response(15px);

@@ -10,8 +10,8 @@ import numeral from 'numeral';
 import moment from 'moment';
 import { t } from '../../lang';
 import Transport from '../../classes/Transport';
-import PurchaseModel from '../../models/purchase-model';
 import { config } from '../../config';
+import { app as appActions } from '../../store/actions';
 
 import './Purchase.scss';
 
@@ -19,14 +19,12 @@ const numberFormat = config.get('numberFormat');
 const dateFormatLong = config.get('dateFormatLong');
 const formatNumber = (value) => (numeral(value).format(numberFormat).replace(/,/g, ' '));
 
-function Purchase({ token }) {
-    const [purchases, setPurchases] = useState(null);
+function Purchase({ token, dispatch, purchases }) {
     const [modal, setModal] = useState(false);
     const [currentPurchase, setPurchase] = useState(null);
     useEffect(async () => {
         const purchasesResponse = await Transport.getPurchases(token);
-        const purchasesModels = purchasesResponse.map((purchase) => (new PurchaseModel(purchase)));
-        setPurchases(purchasesModels);
+        dispatch(appActions.setPurchases(purchasesResponse));
     }, []);
     const toggle = () => setModal(!modal);
     const openDetails = (purchase) => {
@@ -85,6 +83,11 @@ function Purchase({ token }) {
                                 </div>
                             </div>
                         ))}
+                        {(purchases.length === 0) && (
+                            <div className="Table_Row">
+                                <div className="Table_Cell">{t('No data available')}</div>
+                            </div>
+                        )}
                     </Scrollbars>
                 </div>
             </div>
@@ -138,7 +141,8 @@ function Purchase({ token }) {
 
 const mapStateToProps = (state) => {
     const token = _.get(state.app, 'authInfo.access_token');
-    return { token };
+    const purchases = _.get(state.app, 'purchases', []);
+    return { token, purchases };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -147,7 +151,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 Purchase.propTypes = {
     token: PropTypes.string.isRequired,
-    // dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+    purchases: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Purchase);

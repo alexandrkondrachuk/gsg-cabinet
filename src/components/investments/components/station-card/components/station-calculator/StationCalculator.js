@@ -76,7 +76,7 @@ export default function StationCalculator({
         togglePage(depositTab.id.toString());
     };
 
-    const resetResult = (timeout = 5000) => {
+    const resetResult = (timeout = 3000) => {
         _.delay(() => {
             toggle();
             setInfo({ ...initInfo });

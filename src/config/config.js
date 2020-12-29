@@ -33,7 +33,7 @@ config.set({
         redirectAfterAuth: 5 * 1000,
     },
     dateFormat: 'DD.MM.YYYY',
-    dateFormatLong: 'DD.MM.YYYY hh:mm:ss',
+    dateFormatLong: 'DD.MM.YYYY HH:mm:ss',
     limits: {
         min: 0,
         max: 100000,

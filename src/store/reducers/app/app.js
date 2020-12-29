@@ -8,6 +8,8 @@ import UserInfoModel from '../../../models/user-info-model';
 import Register from '../../../classes/register';
 import RegisterSession from '../../../classes/register-session';
 import { config } from '../../../config';
+import PurchaseModel from '../../../models/purchase-model';
+import OperationModel from '../../../models/operation-model';
 
 const storage = config.get('storage');
 const authStoreName = _.get(storage, 'auth');
@@ -25,10 +27,20 @@ const initialState = new Record({
     authInfo,
     userInfo: new UserInfoModel(),
     stations: null,
+    purchases: [],
+    history: [],
 })();
 
 function updateUserInfo(prevModel, newModel) {
     return new UserInfoModel(_.merge(prevModel, newModel));
+}
+
+function setPurchasesModel(purchases = []) {
+    return purchases.map((purchase) => (new PurchaseModel(purchase)));
+}
+
+function setHistoryModel(history = []) {
+    return history.map((operation) => (new OperationModel(operation)));
 }
 
 const app = (state = initialState, action) => {
@@ -44,6 +56,10 @@ const app = (state = initialState, action) => {
         return state.merge({ stations: action.payload });
     case appActions.APP_UPDATE_USER_INFO:
         return state.merge({ userInfo: updateUserInfo(state.userInfo, action.payload) });
+    case appActions.APP_SET_PURCHASES:
+        return state.merge({ purchases: setPurchasesModel(action.payload) });
+    case appActions.APP_SET_HISTORY:
+        return state.merge({ history: setHistoryModel(action.payload) });
     default:
         return state;
     }

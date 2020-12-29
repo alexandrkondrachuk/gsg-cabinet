@@ -9,13 +9,14 @@ import UserInfoModel from '../../models/user-info-model';
 import { t } from '../../lang';
 
 function Investments({
-    stations, authInfo, userInfo, toggle, lang,
+    stations, authInfo, userInfo, toggle, lang, dispatch,
 }) {
     return (
         <div className="Investments">
             <h2 className="Investments__Title">{t('Affordable investment')}</h2>
             {(stations && stations.length) && (
-                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} userInfo={userInfo} lang={lang} />))
+                // eslint-disable-next-line max-len
+                stations.map((station) => (<StationCard key={station.Id} station={station} authInfo={authInfo} toggle={toggle} userInfo={userInfo} lang={lang} dispatch={dispatch} />))
             )}
         </div>
     );
@@ -46,6 +47,7 @@ Investments.propTypes = {
     toggle: PropTypes.func.isRequired,
     userInfo: PropTypes.instanceOf(UserInfoModel).isRequired,
     lang: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Investments);
