@@ -88,5 +88,13 @@ export default {
         Close: 'Close',
         'Affordable investment': 'Affordable investment',
         'Profile settings': 'Profile settings',
+        'Choose your deposit method': 'Choose your deposit method',
+        Bitcoin: 'Bitcoin',
+        Card: 'Card',
+        'Card Number': 'Card Number',
+        Name: 'Name',
+        'Valid Thru': 'Valid Thru',
+        CVC: 'CVC',
+        Pay: 'Pay',
     },
 };

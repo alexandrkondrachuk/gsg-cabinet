@@ -33,4 +33,15 @@ export default class Types {
         3: 'Purchase',
         4: 'Dividend',
     };
+
+    static withdrawalMethods = [
+        {
+            id: 0, name: 'Bitcoin', icon: 'bitcoinIcon', enabled: true,
+        },
+        {
+            id: 1, name: 'Card', icon: 'creditCardIcon', enabled: true,
+        },
+    ];
+
+    static withdrawalMethodsMap = Types.withdrawalMethods.reduce((acc, item) => acc.set(item.id, { ...item }), new Map());
 }

@@ -1,0 +1,92 @@
+@import "../../../../assets/scss/utilities/variables";
+@import "../../../../assets/scss/utilities/functions";
+@import "../../../../assets/scss/base/typography";
+
+.Bitcoin {
+  position: relative;
+  margin: response(20px) 0 response(45px) 0;
+  width: 100%;
+  height: response(400px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background: #ffffff url("../../../../assets/images/btc-wallet-01.jpg") no-repeat center center;
+  background-size: 100% auto;
+  box-shadow: 0 10px 10px -6px var(--dark);
+
+  .bitcoin-icon {
+    width: response(100px);
+    height: response(100px);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: rotate(-15deg);
+  }
+
+  &__Card, .container, .row {
+    width: 100%;
+    height: 100%;
+  }
+
+  #BTCForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+
+    .form-group {
+      width: 100%;
+    }
+
+    .form-text {
+      padding: response(6px);
+      @extend .font-mono-1;
+      font-weight: 500;
+      color: var(--white) !important;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #BTCAddress {
+      width: 100%;
+      height: response(45px);
+      border-radius: 0;
+      @extend .font-mono-2;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0.75rem 0.25rem rgba(255, 255, 255, 0.9);
+
+      &:focus {
+        box-shadow: 0 0 0.75rem 0.25rem rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    .btn {
+      width: response(175px);
+      height: response(45px);
+      border-radius: 0;
+      border-color: rgba(255, 255, 255, 0.85);
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0.75rem 0.125rem rgba(255, 255, 255, 0.9);
+      @extend .font-mono-4;
+      font-weight: 500;
+      color: var(--dark);
+      transition: all .25s linear;
+
+      &:first-of-type {
+        margin-right: response(15px);
+      }
+
+      &.copied {
+        box-shadow: 0 0 0.75rem 0.125rem var(--green);
+        color: var(--green);
+        border-color: var(--green);
+      }
+    }
+
+    input {
+      @extend .font-mono-1;
+      color: var(--dark);
+    }
+  }
+}

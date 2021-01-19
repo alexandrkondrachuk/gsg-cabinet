@@ -1,0 +1,34 @@
+@import "../../../../assets/scss/utilities/variables";
+@import "../../../../assets/scss/utilities/functions";
+@import "../../../../assets/scss/base/typography";
+
+.Card {
+  margin: response(20px) 0 response(45px) 0;
+  width: 100%;
+
+  .rccs {
+    margin: response(45px) auto;
+  }
+
+  input {
+    @extend .font-secondary;
+    border-radius: 0;
+    border-color: var(--gray-dark);
+    min-height: response(45px);
+    color: var(--gray);
+    background-color: var(--bg-light);
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      border-color: var(--blue);
+    }
+  }
+
+  label {
+    margin: 0;
+    @extend .font-mono-5;
+    font-weight: 500;
+    color: var(--green);
+  }
+}

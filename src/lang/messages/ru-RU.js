@@ -88,5 +88,13 @@ export default {
         Close: 'Закрыть',
         'Affordable investment': 'Доступные инвестиции',
         'Profile settings': 'Настройки профиля',
+        'Choose your deposit method': 'Выберите метод депозита',
+        Bitcoin: 'Bitcoin',
+        Card: 'Карта',
+        'Card Number': 'Номер карты',
+        Name: 'Имя',
+        'Valid Thru': 'Valid Thru',
+        CVC: 'CVC',
+        Pay: 'Оплатить',
     },
 };

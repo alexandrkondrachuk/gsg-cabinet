@@ -1,61 +1,67 @@
 import React, { useState } from 'react';
 import {
-    Container, Row, Col,
-    Form, FormGroup, Label, Input, Button, FormText,
+    Container, Row, Col, Button,
 } from 'reactstrap';
-import { ReactSVG } from 'react-svg';
 import * as _ from 'lodash';
-import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import * as cn from 'classnames';
+import { ReactSVG } from 'react-svg';
 import { t } from '../../lang';
-import bitcoin from '../../assets/images/icons/bitcoin.svg';
-import Transport from '../../classes/Transport';
-import { app as appActions } from '../../store/actions';
+import { Bitcoin, Card } from './methods';
+import Types from '../../classes/Types';
+import bitcoinIcon from '../../assets/images/icons/bitcoin.svg';
+import creditCardIcon from '../../assets/images/icons/credit-card.svg';
 
 import './Deposit.scss';
 
-function Deposit({ token, BTCAddress, dispatch }) {
-    const [BTCStatus, setBTCStatus] = useState(false);
-    const [copy, setCopy] = useState(false);
-    const getBTCAddress = async (e) => {
-        setBTCStatus(!BTCStatus);
-        e.preventDefault();
-        const btcAddressResponse = await Transport.getBTCAddress(token);
-        dispatch(appActions.updateUserInfo({
-            BTCAddress: btcAddressResponse,
-        }));
-    };
-    const copyBTCAddress = () => {
-        setCopy(true);
+const methods = Types.withdrawalMethods;
+const methodsFiltered = methods.filter((m) => !!m.enabled);
+const activeIndex = (_.get(methodsFiltered, '[0].id', 0)).toString();
+
+const methodsIcons = {
+    bitcoinIcon,
+    creditCardIcon,
+};
+
+function Deposit() {
+    const [active, setActive] = useState(activeIndex);
+
+    const renderMethod = (id) => {
+        switch (id) {
+        case '0':
+            return (<Bitcoin />);
+        case '1':
+            return (<Card />);
+        default:
+            return (<Bitcoin />);
+        }
     };
     return (
         <div className="Deposit">
-            <div className="Deposit__Card">
+            <div className="Deposit__Container">
                 <Container>
                     <Row>
-                        <Col xs={12} lg={6}>
-                            <Form id="BTCForm" onSubmit={getBTCAddress}>
-                                <FormGroup>
-                                    <FormText>{ t('Generate BTC address') }</FormText>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="BTCAddress" className="d-none">{ t('BTC Address') }</Label>
-                                    <Input type="text" name="BTCAddress" id="BTCAddress" readOnly value={BTCAddress} />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Button disabled={BTCStatus || !!BTCAddress}>{ t('Generate') }</Button>
-                                    <CopyToClipboard text={BTCAddress} onCopy={copyBTCAddress}>
-                                        <Button className={cn({ copied: copy })}>{ copy ? t('Copied') : t('Copy') }</Button>
-                                    </CopyToClipboard>
-                                </FormGroup>
-                            </Form>
-                        </Col>
+                        <h2 className="Deposit__Title">{t('Choose your deposit method')}</h2>
+                        <div className="Deposit__Details">
+                            <Row>
+                                {(methodsFiltered && Array.isArray(methodsFiltered) && methodsFiltered.length > 0) && (
+                                    // eslint-disable-next-line max-len
+                                    methodsFiltered.map((m) => (
+                                        <Col md={12} lg={6} key={m.id} className="Deposit__Method">
+                                            {/* eslint-disable-next-line max-len */}
+                                            <Button onClick={() => { setActive(m.id.toString()); }} block className={cn({ active: (active === m.id.toString()), Deposit__Method__Btn: true, [m.icon]: !!m.icon })}>
+                                                <ReactSVG src={methodsIcons[m.icon]} className="Deposit__Method__Icon" />
+                                                {t(m.name)}
+                                            </Button>
+                                        </Col>
+                                    ))
+                                )}
+                            </Row>
+                        </div>
+                        { renderMethod(active) }
                     </Row>
                 </Container>
             </div>
-            <ReactSVG src={bitcoin} className="bitcoin-icon" />
         </div>
     );
 }
@@ -69,11 +75,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     dispatch,
 });
-
-Deposit.propTypes = {
-    token: PropTypes.string.isRequired,
-    BTCAddress: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deposit);
