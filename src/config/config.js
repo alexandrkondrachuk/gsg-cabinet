@@ -1,7 +1,7 @@
 import config from 'react-global-configuration';
 
-const server = 'http://akondrachuk.s-host.net/';
-const apiServer = 'http://globalsungroup.com/sunserver/';
+const server = 'https://globalsungroup.com/';
+const apiServer = 'https://globalsungroup.com/sunserver/';
 
 config.set({
     storage: {
@@ -23,6 +23,7 @@ config.set({
             getBTCAddressURL: `${apiServer}api/Account/GetBTCAddress`,
             getFinancialOperationURL: `${apiServer}api/Account/GetAccountFinancialOperations`,
             getPurchasesURL: `${apiServer}api/Account/GetAccountPurchasesWithDividends`,
+            doCardPaymentURL: `${apiServer}api/Payments/PostCardPayment`,
             contentPostsApiURL: `${server}wp-json/wp/v2/posts`,
         },
     },

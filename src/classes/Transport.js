@@ -14,6 +14,7 @@ const uploadUserFileUrl = _.get(urls, 'api.uploadUserFileUrl');
 const getBTCAddressURL = _.get(urls, 'api.getBTCAddressURL');
 const getFinancialOperationURL = _.get(urls, 'api.getFinancialOperationURL');
 const getPurchasesURL = _.get(urls, 'api.getPurchasesURL');
+const doCardPaymentURL = _.get(urls, 'api.doCardPaymentURL');
 const categories = _.get(api, 'categories');
 
 export default class Transport {
@@ -169,6 +170,20 @@ export default class Transport {
         try {
             const change = await axios.post(changePasswordURL, model, { headers: { Authorization: `Bearer ${token}` } });
             const status = _.get(change, 'status');
+            // eslint-disable-next-line consistent-return
+            return (status === Transport.STATUS_OK);
+        } catch (e) {
+            // eslint-disable-next-line consistent-return
+            return e;
+        }
+    }
+
+    // Do card payment
+    static async doCardPayment(model, token) {
+        if (!model || !token) return;
+        try {
+            const payment = await axios.post(doCardPaymentURL, model, { headers: { Authorization: `Bearer ${token}` } });
+            const status = _.get(payment, 'status');
             // eslint-disable-next-line consistent-return
             return (status === Transport.STATUS_OK);
         } catch (e) {

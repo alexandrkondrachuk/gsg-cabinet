@@ -96,5 +96,9 @@ export default {
         'Valid Thru': 'Valid Thru',
         CVC: 'CVC',
         Pay: 'Оплатить',
+        'SMS confirmation code': 'Код подтверждения по SMS',
+        'SMS Code': 'SMS код',
+        'Send SMS Code': 'Отправить SMS-код',
+        'Your payment is being processed. Wait for funds to be credited.': 'Ваш платёж в обработке. Ожидайте зачисления средств.',
     },
 };

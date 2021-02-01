@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as PropTypes from 'prop-types';
 import {
     Container, Row, Col, Button,
 } from 'reactstrap';
@@ -23,7 +24,7 @@ const methodsIcons = {
     creditCardIcon,
 };
 
-function Deposit() {
+function Deposit({ token }) {
     const [active, setActive] = useState(activeIndex);
 
     const renderMethod = (id) => {
@@ -31,7 +32,7 @@ function Deposit() {
         case '0':
             return (<Bitcoin />);
         case '1':
-            return (<Card />);
+            return (<Card token={token} />);
         default:
             return (<Bitcoin />);
         }
@@ -65,6 +66,10 @@ function Deposit() {
         </div>
     );
 }
+
+Deposit.propTypes = {
+    token: PropTypes.string.isRequired,
+};
 
 const mapStateToProps = (state) => {
     const BTCAddress = _.get(state.app, 'userInfo.BTCAddress', '');

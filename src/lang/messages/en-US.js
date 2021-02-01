@@ -96,5 +96,9 @@ export default {
         'Valid Thru': 'Valid Thru',
         CVC: 'CVC',
         Pay: 'Pay',
+        'SMS confirmation code': 'SMS confirmation code',
+        'SMS Code': 'SMS Code',
+        'Send SMS Code': 'Send SMS Code',
+        'Your payment is being processed. Wait for funds to be credited.': 'Your payment is being processed. Wait for funds to be credited.',
     },
 };

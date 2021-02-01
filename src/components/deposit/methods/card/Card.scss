@@ -32,3 +32,49 @@
     color: var(--green);
   }
 }
+
+#sms-verification-code-form {
+  input {
+    @extend .font-secondary;
+    border-radius: 0;
+    border-color: var(--gray-dark);
+    min-height: response(45px);
+    color: var(--gray);
+    background-color: var(--bg-light);
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      border-color: var(--blue);
+    }
+  }
+
+  label {
+    margin: 0;
+    @extend .font-mono-5;
+    font-weight: 500;
+    color: var(--green);
+  }
+}
+
+.SMSCodeModal {
+  .modal-content {
+    border-radius: 0;
+  }
+
+  .modal-title {
+    @extend .font-mono-2;
+  }
+
+  .alert {
+    border-radius: 0;
+    @extend .font-mono-5;
+    font-weight: 500;
+    color: var(--green);
+  }
+
+  .btn {
+    border-radius: 0;
+    @extend .font-mono-2;
+  }
+}
